@@ -152,7 +152,8 @@ strong {
     inset: 0;
     background:
         linear-gradient(180deg, transparent 0%, var(--forest-deep) 100%),
-        url('https://images.unsplash.com/photo-1541370976299-4d24ebbc9077?w=1920&q=80') center/cover;
+        /* EDIT: Replace with your destination photo - use https://source.unsplash.com/[PHOTO_ID]/1920x1080 */
+        url('https://source.unsplash.com/featured/?travel,architecture/1920x1080') center/cover;
     opacity: 0.25;
     animation: heroReveal 1.5s var(--ease-out) forwards;
 }
