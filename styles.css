@@ -152,7 +152,10 @@ strong {
     inset: 0;
     background:
         linear-gradient(180deg, transparent 0%, var(--forest-deep) 100%),
-        /* EDIT: Replace with your destination photo from Wikimedia Commons or Pexels */
+        /* EDIT: Replace with Unsplash API image URL
+           Use: curl -s "https://api.unsplash.com/search/photos?query=YOUR+CITY&orientation=landscape" \
+                -H "Authorization: Client-ID YOUR_KEY" | python3 -c "import json,sys;[print(p['urls']['regular']) for p in json.load(sys.stdin)['results']]"
+           Then change w=1080 to w=1920 in the URL */
         url('https://picsum.photos/1920/1080') center/cover;
     opacity: 0.25;
     animation: heroReveal 1.5s var(--ease-out) forwards;
@@ -1119,4 +1122,70 @@ footer p:last-child {
     .day-full {
         break-inside: avoid;
     }
+}
+
+/* ========================================
+   EXPANDABLE SECTIONS
+   ======================================== */
+.expandable-section {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows var(--duration-slow) var(--ease-out);
+    overflow: hidden;
+}
+
+.expandable-section.expanded {
+    grid-template-rows: 1fr;
+}
+
+.expandable-inner {
+    min-height: 0;
+}
+
+.see-more-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 100%;
+    margin-top: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: transparent;
+    border: 1px solid var(--parchment);
+    border-radius: 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--stone);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+}
+
+.see-more-btn:hover {
+    border-color: var(--forest);
+    color: var(--forest);
+    background: color-mix(in oklch, var(--forest) 5%, transparent);
+}
+
+.see-more-btn svg {
+    width: 1em;
+    height: 1em;
+    transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.see-more-btn.expanded svg {
+    transform: rotate(180deg);
+}
+
+.expandable-divider {
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+    padding-bottom: var(--space-xs);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--charcoal);
+    border-bottom: 1px solid var(--parchment);
 }

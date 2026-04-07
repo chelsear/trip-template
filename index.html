@@ -149,8 +149,8 @@
             </div>
         </section>
 
-        <!-- EDIT: Add a photo divider - find a photo of YOUR destination on Wikimedia Commons
-             Search: commons.wikimedia.org and copy direct image URL -->
+        <!-- EDIT: Add a photo divider using Unsplash API
+             Search for your city, get the regular URL, change w=1080 to w=1600 -->
         <div class="photo-divider to-alt" style="background-image: url('https://picsum.photos/1600/600');" aria-hidden="true"></div>
 
         <!-- ============================================
@@ -228,12 +228,14 @@
                 <p class="section-intro">Curated restaurant picks for your trip</p>
 
                 <div class="venue-grid">
-                    <!-- EDIT: 6-8 top restaurant picks -->
+                    <!-- EDIT: 6-8 top restaurant picks
+                         Google Maps link format: https://www.google.com/maps/search/?api=1&query=Restaurant+Name+City+Country -->
                     <div class="venue-card">
                         <div class="venue-rating">Cuisine Type</div>
                         <h4>Restaurant Name</h4>
                         <p class="venue-location">Address, Neighborhood · €€</p>
                         <p class="venue-desc">What they're known for. Reserve ahead.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Restaurant+Name+City+Country" target="_blank" class="btn btn-small">Map</a>
                     </div>
 
                     <div class="venue-card">
@@ -241,6 +243,7 @@
                         <h4>Another Restaurant</h4>
                         <p class="venue-location">Address · €€</p>
                         <p class="venue-desc">Signature dishes, vibe.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Another+Restaurant+City+Country" target="_blank" class="btn btn-small">Map</a>
                     </div>
 
                     <div class="venue-card">
@@ -248,6 +251,7 @@
                         <h4>Veggie Spot</h4>
                         <p class="venue-location">Address · €</p>
                         <p class="venue-desc">Great plant-based options.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Veggie+Spot+City+Country" target="_blank" class="btn btn-small">Map</a>
                     </div>
 
                     <div class="venue-card">
@@ -255,6 +259,7 @@
                         <h4>Fish Restaurant</h4>
                         <p class="venue-location">Address · €€-€€€</p>
                         <p class="venue-desc">Fresh catch, crudo, etc.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Fish+Restaurant+City+Country" target="_blank" class="btn btn-small">Map</a>
                     </div>
 
                     <div class="venue-card">
@@ -262,6 +267,7 @@
                         <h4>Traditional Spot</h4>
                         <p class="venue-location">Address · €€</p>
                         <p class="venue-desc">Local classics done right.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Traditional+Spot+City+Country" target="_blank" class="btn btn-small">Map</a>
                     </div>
 
                     <div class="venue-card">
@@ -269,6 +275,49 @@
                         <h4>Affordable Pick</h4>
                         <p class="venue-location">Address · €</p>
                         <p class="venue-desc">Great value, casual vibe.</p>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Affordable+Pick+City+Country" target="_blank" class="btn btn-small">Map</a>
+                    </div>
+                </div>
+
+                <!-- EDIT: Optional expandable section for more restaurants & aperitivo -->
+                <button class="see-more-btn" onclick="toggleMore(this)" aria-expanded="false">
+                    <span>More Restaurants & Aperitivo</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+
+                <div class="expandable-section" id="more-dining">
+                    <div class="expandable-inner">
+                        <h3 class="expandable-divider">More Restaurants</h3>
+                        <div class="venue-grid">
+                            <!-- EDIT: Additional restaurant picks -->
+                            <div class="venue-card">
+                                <div class="venue-rating">Type</div>
+                                <h4>Restaurant Name</h4>
+                                <p class="venue-location">Address · €€</p>
+                                <p class="venue-desc">Description.</p>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Restaurant+City" target="_blank" class="btn btn-small">Map</a>
+                            </div>
+                        </div>
+
+                        <h3 class="expandable-divider">Aperitivo & Happy Hour</h3>
+                        <div class="venue-grid">
+                            <!-- EDIT: Aperitivo/happy hour spots -->
+                            <div class="venue-card">
+                                <div class="venue-rating">6-9 PM</div>
+                                <h4>Bar Name</h4>
+                                <p class="venue-location">Address · €</p>
+                                <p class="venue-desc">Happy hour details, vibe.</p>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Bar+Name+City" target="_blank" class="btn btn-small">Map</a>
+                            </div>
+
+                            <div class="venue-card">
+                                <div class="venue-rating">Wine Bar</div>
+                                <h4>Wine Spot</h4>
+                                <p class="venue-location">Address · €€</p>
+                                <p class="venue-desc">Natural wines, small plates.</p>
+                                <a href="https://www.google.com/maps/search/?api=1&query=Wine+Spot+City" target="_blank" class="btn btn-small">Map</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -283,6 +332,7 @@
     </footer>
 
     <script>
+        // Smooth scroll for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -292,6 +342,15 @@
                 window.scrollTo({ top: targetPosition, behavior: 'smooth' });
             });
         });
+
+        // Toggle expandable sections
+        function toggleMore(btn) {
+            const section = btn.nextElementSibling;
+            const isExpanded = section.classList.toggle('expanded');
+            btn.classList.toggle('expanded', isExpanded);
+            btn.setAttribute('aria-expanded', isExpanded);
+            btn.querySelector('span').textContent = isExpanded ? 'Show Less' : 'More Restaurants & Aperitivo';
+        }
     </script>
 </body>
 </html>
