@@ -281,7 +281,7 @@
 
                 <!-- EDIT: Optional expandable section for more restaurants & aperitivo -->
                 <button class="see-more-btn" onclick="toggleMore(this)" aria-expanded="false">
-                    <span>More Restaurants & Aperitivo</span>
+                    <span>More Restaurants & Drinks</span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </button>
 
@@ -299,9 +299,9 @@
                             </div>
                         </div>
 
-                        <h3 class="expandable-divider">Aperitivo & Happy Hour</h3>
+                        <h3 class="expandable-divider">Happy Hour</h3>
                         <div class="venue-grid">
-                            <!-- EDIT: Aperitivo/happy hour spots -->
+                            <!-- EDIT: Happy hour spots (use "Aperitivo" for Italian cities) -->
                             <div class="venue-card">
                                 <div class="venue-rating">6-9 PM</div>
                                 <h4>Bar Name</h4>
@@ -349,7 +349,7 @@
             const isExpanded = section.classList.toggle('expanded');
             btn.classList.toggle('expanded', isExpanded);
             btn.setAttribute('aria-expanded', isExpanded);
-            btn.querySelector('span').textContent = isExpanded ? 'Show Less' : 'More Restaurants & Aperitivo';
+            btn.querySelector('span').textContent = isExpanded ? 'Show Less' : 'More Restaurants & Drinks';
         }
     </script>
 </body>
